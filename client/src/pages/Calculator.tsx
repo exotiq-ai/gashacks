@@ -167,7 +167,7 @@ export default function Calculator() {
       <header className="border-b border-border/50 backdrop-blur-sm bg-background/80 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/gas-hacks-logo.png" alt="Gas Hacks" className="w-12 h-12" />
+            <img src="/gas-hacks-icon.png" alt="Gas Hacks" className="w-12 h-12" />
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 bg-clip-text text-transparent">
                 Gas Hacks
@@ -464,7 +464,7 @@ export default function Calculator() {
         <div className="container py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <img src="/gas-hacks-logo.png" alt="Gas Hacks" className="w-5 h-5" />
+              <img src="/gas-hacks-icon.png" alt="Gas Hacks" className="w-5 h-5" />
               <span className="font-semibold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">Gas Hacks v6.0</span>
             </div>
             <div className="text-center md:text-right">
