@@ -1,0 +1,375 @@
+import { useEffect, useState } from "react";
+import { Droplet, Gauge, Moon, Sun } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { PremiumSlider } from "@/components/PremiumSlider";
+import { VehicleSelector } from "@/components/VehicleSelector";
+import { FuelGauge } from "@/components/FuelGauge";
+import { CostCalculator } from "@/components/CostCalculator";
+import {
+  calculateBlend,
+  calculateEthanolOnlyBlend,
+} from "@/lib/calculator";
+import { CalculatorState, DEFAULT_CALCULATOR_STATE } from "@/lib/types";
+import {
+  loadCalculatorState,
+  saveCalculatorState,
+} from "@/lib/storage";
+import { useTheme } from "@/contexts/ThemeContext";
+
+export default function Calculator() {
+  const { theme, toggleTheme } = useTheme();
+  const [state, setState] = useState<CalculatorState>(DEFAULT_CALCULATOR_STATE);
+
+  // Load saved state on mount
+  useEffect(() => {
+    const savedState = loadCalculatorState();
+    setState(savedState);
+  }, []);
+
+  // Save state whenever it changes
+  useEffect(() => {
+    saveCalculatorState(state);
+  }, [state]);
+
+  const updateState = (updates: Partial<CalculatorState>) => {
+    setState((prev) => ({ ...prev, ...updates }));
+  };
+
+  const handleVehicleChange = (model: string, tankSize: number) => {
+    if (tankSize > 0) {
+      updateState({ selectedModel: model, tankSize });
+    } else {
+      updateState({ selectedModel: model });
+    }
+  };
+
+  // Calculate blend results
+  const blendResult = calculateBlend(
+    {
+      tankSize: state.tankSize,
+      currentLevel: state.currentLevel,
+      currentEthanol: state.currentEthanol,
+      targetEthanol: state.targetEthanol,
+      pumpGasEthanol: state.pumpGasEthanol,
+      ethanolFuelPercent: state.ethanolFuelPercent,
+    },
+    {
+      pumpGasOctane: state.pumpGasOctane,
+      ethanolFuelOctane: state.ethanolFuelOctane,
+    }
+  );
+
+  const ethanolOnlyResult = calculateEthanolOnlyBlend(
+    {
+      tankSize: state.tankSize,
+      currentLevel: state.currentLevel,
+      currentEthanol: state.currentEthanol,
+      targetEthanol: state.targetEthanol,
+      pumpGasEthanol: state.pumpGasEthanol,
+      ethanolFuelPercent: state.ethanolFuelPercent,
+    },
+    {
+      pumpGasOctane: state.pumpGasOctane,
+      ethanolFuelOctane: state.ethanolFuelOctane,
+    }
+  );
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-accent/20 flex items-center justify-center">
+                <Droplet className="h-6 w-6 text-accent" />
+              </div>
+              <div>
+                <h1 className="text-xl font-semibold text-foreground">
+                  Ethanol Blend Calculator
+                </h1>
+                <p className="text-xs text-muted-foreground">
+                  Performance Fuel Mixing
+                </p>
+              </div>
+            </div>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={toggleTheme}
+              className="rounded-full"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <main className="container py-8">
+        <div className="max-w-4xl mx-auto space-y-6">
+          {/* Vehicle Selection */}
+          <Card className="p-6 bg-card border-border">
+            <VehicleSelector
+              selectedMake={state.selectedMake}
+              selectedModel={state.selectedModel}
+              onMakeChange={(make) => updateState({ selectedMake: make })}
+              onModelChange={handleVehicleChange}
+            />
+          </Card>
+
+          {/* Tank Configuration */}
+          <Card className="p-6 bg-card border-border space-y-6">
+            <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
+              <Gauge className="h-5 w-5 text-accent" />
+              Tank Configuration
+            </h2>
+
+            <PremiumSlider
+              label="Fuel Tank Size"
+              value={state.tankSize}
+              min={5}
+              max={30}
+              step={0.1}
+              unit="gal"
+              onChange={(value) => updateState({ tankSize: value })}
+              decimals={1}
+            />
+
+            <PremiumSlider
+              label="Current Tank Level"
+              value={state.currentLevel}
+              min={0}
+              max={100}
+              step={1}
+              unit="%"
+              onChange={(value) => updateState({ currentLevel: value })}
+              decimals={0}
+            />
+
+            <FuelGauge
+              currentLevel={state.currentLevel}
+              tankSize={state.tankSize}
+            />
+
+            <PremiumSlider
+              label="Current E-mix"
+              value={state.currentEthanol}
+              min={0}
+              max={100}
+              step={1}
+              unit="%"
+              onChange={(value) => updateState({ currentEthanol: value })}
+              decimals={0}
+            />
+
+            <PremiumSlider
+              label="Target E-mix"
+              value={state.targetEthanol}
+              min={0}
+              max={100}
+              step={1}
+              unit="%"
+              onChange={(value) => updateState({ targetEthanol: value })}
+              decimals={0}
+            />
+          </Card>
+
+          {/* Fuel Configuration */}
+          <Card className="p-6 bg-card border-border space-y-6">
+            <h2 className="text-lg font-semibold text-foreground">
+              Fuel Configuration
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <PremiumSlider
+                label="Pump Gas Ethanol %"
+                value={state.pumpGasEthanol}
+                min={0}
+                max={15}
+                step={1}
+                unit="%"
+                onChange={(value) => updateState({ pumpGasEthanol: value })}
+                decimals={0}
+              />
+
+              <PremiumSlider
+                label="Ethanol Fuel %"
+                value={state.ethanolFuelPercent}
+                min={50}
+                max={100}
+                step={1}
+                unit="%"
+                onChange={(value) =>
+                  updateState({ ethanolFuelPercent: value })
+                }
+                decimals={0}
+              />
+
+              <PremiumSlider
+                label="Pump Gas Octane"
+                value={state.pumpGasOctane}
+                min={87}
+                max={93}
+                step={1}
+                onChange={(value) => updateState({ pumpGasOctane: value })}
+                decimals={0}
+              />
+
+              <PremiumSlider
+                label="Ethanol Fuel Octane"
+                value={state.ethanolFuelOctane}
+                min={95}
+                max={113}
+                step={1}
+                onChange={(value) => updateState({ ethanolFuelOctane: value })}
+                decimals={0}
+              />
+            </div>
+          </Card>
+
+          {/* Results */}
+          <Card className="p-6 bg-card border-border space-y-6">
+            <h2 className="text-lg font-semibold text-foreground">Results</h2>
+
+            {!blendResult.canFillToTarget && (
+              <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
+                <p className="text-sm text-destructive">
+                  {blendResult.errorMessage}
+                </p>
+              </div>
+            )}
+
+            {/* Mixed Blend */}
+            <div className="space-y-4">
+              <h3 className="text-base font-medium text-foreground flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-accent" />
+                E{Math.round(state.targetEthanol)} Mixed Blend
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-1">
+                    Ethanol to Add
+                  </p>
+                  <p className="text-2xl font-bold text-accent">
+                    {blendResult.ethanolToAdd}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    gal @ {state.ethanolFuelPercent}%
+                  </p>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-1">
+                    Pump Gas to Add
+                  </p>
+                  <p className="text-2xl font-bold text-accent">
+                    {blendResult.pumpGasToAdd}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    gal @ {state.pumpGasEthanol}%
+                  </p>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-1">
+                    Resulting Mix
+                  </p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {blendResult.resultingMix}%
+                  </p>
+                  <p className="text-xs text-muted-foreground">Ethanol</p>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-1">Octane</p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {blendResult.octaneRating}
+                  </p>
+                  <p className="text-xs text-muted-foreground">Rating</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Ethanol Only */}
+            <div className="space-y-4">
+              <h3 className="text-base font-medium text-foreground flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-accent" />
+                E{Math.round(state.targetEthanol)} Ethanol Only
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-1">
+                    Ethanol to Add
+                  </p>
+                  <p className="text-2xl font-bold text-accent">
+                    {ethanolOnlyResult.ethanolToAdd}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    gal @ {state.ethanolFuelPercent}%
+                  </p>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-1">
+                    Pump Gas to Add
+                  </p>
+                  <p className="text-2xl font-bold text-accent">
+                    {ethanolOnlyResult.pumpGasToAdd}
+                  </p>
+                  <p className="text-xs text-muted-foreground">gal</p>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-1">
+                    Resulting Mix
+                  </p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {ethanolOnlyResult.resultingMix}%
+                  </p>
+                  <p className="text-xs text-muted-foreground">Ethanol</p>
+                </div>
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-1">Octane</p>
+                  <p className="text-2xl font-bold text-foreground">
+                    {ethanolOnlyResult.octaneRating}
+                  </p>
+                  <p className="text-xs text-muted-foreground">Rating</p>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Cost Calculator */}
+          <CostCalculator
+            ethanolToAdd={blendResult.ethanolToAdd}
+            pumpGasToAdd={blendResult.pumpGasToAdd}
+            ethanolPrice={state.fuelPriceEthanol}
+            pumpGasPrice={state.fuelPricePumpGas}
+            onEthanolPriceChange={(price) =>
+              updateState({ fuelPriceEthanol: price })
+            }
+            onPumpGasPriceChange={(price) =>
+              updateState({ fuelPricePumpGas: price })
+            }
+          />
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-card/30 backdrop-blur-sm mt-12">
+        <div className="container py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Droplet className="h-4 w-4 text-accent" />
+              <span>Ethanol Blend Calculator v1.0</span>
+            </div>
+            <div className="text-center md:text-right">
+              <p>Designed for performance enthusiasts</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
