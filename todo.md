@@ -352,3 +352,44 @@
 - [x] Fix or remove performance dashboard if data is inaccurate (temporarily hidden)
 - [x] Only show features that work correctly
 
+
+
+
+## Phase 11 - UI Cleanup
+- [x] Hide Tune Provider selector (IE vs DS1) - not needed without performance data
+- [x] Hide Tune Stage selector (Stock, Stage 1, Stage 2) - not needed without performance data
+- [ ] Clean up imports and unused components
+
+
+
+
+## Phase 12 - User Authentication & Tank History
+
+### Backend Upgrade
+- [ ] Upgrade project from web-static to web-db-user
+- [ ] Set up Supabase connection
+- [ ] Configure database schema
+- [ ] Set up authentication system
+
+### User Authentication
+- [ ] Email + name login form
+- [ ] Supabase Auth integration
+- [ ] User profile management
+- [ ] Session management
+- [ ] Logout functionality
+
+### Tank History Feature
+- [ ] Create tank_history database table
+- [ ] Save calculation results to database
+- [ ] Display history list view
+- [ ] Show previous tank details
+- [ ] Delete history entries
+- [ ] Filter/search history
+
+### UI Components
+- [ ] Login/signup modal
+- [ ] User profile dropdown
+- [ ] Tank history page/modal
+- [ ] History list component
+- [ ] Save confirmation toast
+

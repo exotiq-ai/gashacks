@@ -156,16 +156,16 @@ export default function Calculator() {
             <VehicleSpecsCard vehicleModel={state.selectedModel} />
           )}
 
-          {/* Tune Provider Selector */}
-          <div className="smooth-entrance stagger-2">
+          {/* Tune Provider Selector - Hidden until performance data is re-enabled */}
+          {/* <div className="smooth-entrance stagger-2">
           <TuneProviderSelector
             selectedProvider={state.tuneProvider}
             onProviderChange={(provider) => updateState({ tuneProvider: provider })}
           />
-          </div>
+          </div> */}
 
-          {/* Tune Stage Selector */}
-          {state.selectedModel && (
+          {/* Tune Stage Selector - Hidden until performance data is re-enabled */}
+          {/* {state.selectedModel && (
             <TuneStageSelector
               selectedStage={state.tuneStage}
               onStageChange={(stage: TuneStage) =>
@@ -174,7 +174,7 @@ export default function Calculator() {
               vehicleModel={state.selectedModel}
               tuneProvider={state.tuneProvider}
             />
-          )}
+          )} */}
 
           {/* Preset Modes */}
           <PresetModes
