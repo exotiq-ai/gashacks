@@ -294,7 +294,7 @@ export default function Calculator() {
 
           {/* Results */}
           <Card className="p-6 bg-card border-border space-y-6">
-            <h2 className="text-lg font-semibold text-foreground">Results</h2>
+            <h2 className="text-lg font-semibold text-foreground">Blend Results</h2>
 
             {!blendResult.canFillToTarget && (
               <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg">
@@ -304,12 +304,7 @@ export default function Calculator() {
               </div>
             )}
 
-            {/* Mixed Blend */}
             <div className="space-y-4">
-              <h3 className="text-base font-medium text-foreground flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-accent" />
-                E{Math.round(state.targetEthanol)} Mixed Blend
-              </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="p-4 bg-muted/30 rounded-lg">
                   <p className="text-xs text-muted-foreground mb-1">
@@ -351,64 +346,18 @@ export default function Calculator() {
                 </div>
               </div>
             </div>
-
-            {/* Ethanol Only */}
-            <div className="space-y-4">
-              <h3 className="text-base font-medium text-foreground flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-accent" />
-                E{Math.round(state.targetEthanol)} Ethanol Only
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-4 bg-muted/30 rounded-lg">
-                  <p className="text-xs text-muted-foreground mb-1">
-                    Ethanol to Add
-                  </p>
-                  <p className="text-2xl font-bold text-accent">
-                    {ethanolOnlyResult.ethanolToAdd}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    gal @ {state.ethanolFuelPercent}%
-                  </p>
-                </div>
-                <div className="p-4 bg-muted/30 rounded-lg">
-                  <p className="text-xs text-muted-foreground mb-1">
-                    Pump Gas to Add
-                  </p>
-                  <p className="text-2xl font-bold text-accent">
-                    {ethanolOnlyResult.pumpGasToAdd}
-                  </p>
-                  <p className="text-xs text-muted-foreground">gal</p>
-                </div>
-                <div className="p-4 bg-muted/30 rounded-lg">
-                  <p className="text-xs text-muted-foreground mb-1">
-                    Resulting Mix
-                  </p>
-                  <p className="text-2xl font-bold text-foreground">
-                    {ethanolOnlyResult.resultingMix}%
-                  </p>
-                  <p className="text-xs text-muted-foreground">Ethanol</p>
-                </div>
-                <div className="p-4 bg-muted/30 rounded-lg">
-                  <p className="text-xs text-muted-foreground mb-1">Octane</p>
-                  <p className="text-2xl font-bold text-foreground">
-                    {ethanolOnlyResult.octaneRating}
-                  </p>
-                  <p className="text-xs text-muted-foreground">Rating</p>
-                </div>
-              </div>
-            </div>
           </Card>
 
-          {/* Performance Dashboard */}
-          <PerformanceDashboard
+          {/* Performance Dashboard - Temporarily hidden until data is verified */}
+          {/* <PerformanceDashboard
             performance={performance}
             vehicleModel={state.selectedModel || ""}
-          />
+          /> */}
 
-          {/* Octane Gauge */}
-          <div className="flex justify-center p-8 bg-card border border-border rounded-lg">
+          {/* Octane Gauge - Temporarily hidden */}
+          {/* <div className="flex justify-center p-8 bg-card border border-border rounded-lg">
             <OctaneGauge octane={blendResult.octaneRating} size={240} />
-          </div>
+          </div> */}
 
           {/* Cost Calculator */}
           <CostCalculator

@@ -169,13 +169,18 @@ export function calculateBlend(
   const resultingMix =
     totalFuelAfter > 0 ? (totalEthanolAfter / totalFuelAfter) * 100 : 0;
 
-  // Calculate octane rating (weighted average)
+  // Calculate octane rating (weighted average of ALL fuel in tank)
+  // Estimate current fuel octane based on ethanol content
+  const currentFuelOctane = octaneConfig.pumpGasOctane + 
+    (octaneConfig.ethanolFuelOctane - octaneConfig.pumpGasOctane) * currentEthanolDecimal;
+  
   const octaneRating =
-    ethanolToAdd + pumpGasToAdd > 0
-      ? (ethanolToAdd * octaneConfig.ethanolFuelOctane +
+    totalFuelAfter > 0
+      ? (currentFuelVolume * currentFuelOctane +
+          ethanolToAdd * octaneConfig.ethanolFuelOctane +
           pumpGasToAdd * octaneConfig.pumpGasOctane) /
-        (ethanolToAdd + pumpGasToAdd)
-      : 0;
+        totalFuelAfter
+      : currentFuelOctane;
 
   return {
     ethanolToAdd,
