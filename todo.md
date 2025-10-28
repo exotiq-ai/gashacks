@@ -366,30 +366,38 @@
 ## Phase 12 - User Authentication & Tank History
 
 ### Backend Upgrade
-- [ ] Upgrade project from web-static to web-db-user
-- [ ] Set up Supabase connection
-- [ ] Configure database schema
-- [ ] Set up authentication system
+- [x] Upgrade project from web-static to web-db-user
+- [x] Set up database connection (MySQL/TiDB)
+- [x] Configure database schema (tank_history table created)
+- [x] Set up authentication system (Manus OAuth)
 
 ### User Authentication
-- [ ] Email + name login form
-- [ ] Supabase Auth integration
-- [ ] User profile management
-- [ ] Session management
-- [ ] Logout functionality
+- [x] Email + name login (Manus OAuth)
+- [x] User profile management (via Manus)
+- [x] Session management
+- [x] Logout functionality
 
 ### Tank History Feature
-- [ ] Create tank_history database table
-- [ ] Save calculation results to database
-- [ ] Display history list view
-- [ ] Show previous tank details
-- [ ] Delete history entries
+- [x] Create tank_history database table
+- [x] Save calculation results to database
+- [x] Display history list view
+- [x] Show previous tank details
+- [x] Delete history entries
+- [x] Load previous calculation
 - [ ] Filter/search history
 
 ### UI Components
-- [ ] Login/signup modal
+- [x] Login/signup modal (Manus OAuth)
 - [ ] User profile dropdown
-- [ ] Tank history page/modal
-- [ ] History list component
-- [ ] Save confirmation toast
+- [x] Tank history page/modal
+- [x] History list component
+- [x] Save confirmation toast
+- [x] Save Tank button in header
+- [x] History button in header
+
+
+
+
+## Phase 13 - UI Cleanup
+- [ ] Remove "Made with Manus" from footer
 

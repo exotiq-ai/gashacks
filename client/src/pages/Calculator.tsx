@@ -17,6 +17,12 @@ import { calculatePerformance } from "@/lib/performance";
 import type { TuneStage } from "@/lib/types";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { TankHistoryModal } from "@/components/TankHistoryModal";
+import { trpc } from "@/lib/trpc";
+import { getLoginUrl } from "@/const";
+import { toast } from "sonner";
+import { History, Save } from "lucide-react";
 import {
   calculateBlend,
   calculateEthanolOnlyBlend,
@@ -32,7 +38,19 @@ export default function Calculator() {
   const { theme, toggleTheme } = useTheme();
   const { playClick, playEngineStart, playSuccess } = useSoundEffects();
   const { vibrateClick, vibrateSuccess } = useHapticFeedback();
+  const { user, isAuthenticated } = useAuth();
   const [state, setState] = useState<CalculatorState>(DEFAULT_CALCULATOR_STATE);
+  const [showHistory, setShowHistory] = useState(false);
+
+  const saveTankMutation = trpc.tankHistory.save.useMutation({
+    onSuccess: () => {
+      toast.success("Tank saved to history!");
+      playSuccess();
+    },
+    onError: (error) => {
+      toast.error("Failed to save: " + error.message);
+    },
+  });
 
   // Load saved state on mount
   useEffect(() => {
@@ -57,6 +75,44 @@ export default function Calculator() {
     } else {
       updateState({ selectedModel: model });
     }
+  };
+
+  const handleSaveTank = () => {
+    if (!isAuthenticated) {
+      toast.error("Please login to save history");
+      window.location.href = getLoginUrl();
+      return;
+    }
+
+    saveTankMutation.mutate({
+      vehicleMake: state.selectedMake,
+      vehicleModel: state.selectedModel,
+      tankSize: Math.round(state.tankSize * 10),
+      currentTankLevel: Math.round(state.currentLevel * 10),
+      currentEmix: Math.round(state.currentEthanol * 10),
+      targetEmix: Math.round(state.targetEthanol * 10),
+      pumpGasEthanol: Math.round(state.pumpGasEthanol * 10),
+      pumpGasOctane: state.pumpGasOctane,
+      ethanolFuelPercent: Math.round(state.ethanolFuelPercent * 10),
+      ethanolFuelOctane: state.ethanolFuelOctane,
+      ethanolToAdd: Math.round(blendResult.ethanolToAdd * 100),
+      pumpGasToAdd: Math.round(blendResult.pumpGasToAdd * 100),
+      resultingMix: Math.round(blendResult.resultingMix * 10),
+      resultingOctane: Math.round(blendResult.octaneRating * 10),
+      ethanolPrice: state.fuelPriceEthanol ? Math.round(state.fuelPriceEthanol * 100) : undefined,
+      pumpGasPrice: state.fuelPricePumpGas ? Math.round(state.fuelPricePumpGas * 100) : undefined,
+      totalCost: state.fuelPriceEthanol && state.fuelPricePumpGas
+        ? Math.round(
+            (blendResult.ethanolToAdd * state.fuelPriceEthanol +
+              blendResult.pumpGasToAdd * state.fuelPricePumpGas) *
+              100
+          )
+        : undefined,
+    });
+  };
+
+  const handleLoadHistory = (historyData: any) => {
+    updateState(historyData);
   };
 
   const handlePresetSelect = (preset: PresetMode) => {
@@ -119,7 +175,27 @@ export default function Calculator() {
               <p className="text-xs text-muted-foreground">Performance fuel optimization</p>
             </div>
           </div>
-          <Button
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowHistory(true)}
+              className="gap-2"
+            >
+              <History className="h-4 w-4" />
+              History
+            </Button>
+            <Button
+              variant="default"
+              size="sm"
+              onClick={handleSaveTank}
+              disabled={saveTankMutation.isPending}
+              className="gap-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"
+            >
+              <Save className="h-4 w-4" />
+              {saveTankMutation.isPending ? "Saving..." : "Save Tank"}
+            </Button>
+            <Button
               variant="outline"
               size="icon"
               onClick={toggleTheme}
@@ -131,6 +207,7 @@ export default function Calculator() {
                 <Moon className="h-5 w-5" />
               )}
             </Button>
+          </div>
         </div>
       </header>
 
@@ -374,6 +451,13 @@ export default function Calculator() {
           />
         </div>
       </main>
+
+      {/* Tank History Modal */}
+      <TankHistoryModal
+        open={showHistory}
+        onOpenChange={setShowHistory}
+        onLoadHistory={handleLoadHistory}
+      />
 
       {/* Footer */}
       <footer className="border-t border-border bg-card/30 backdrop-blur-sm mt-12">
