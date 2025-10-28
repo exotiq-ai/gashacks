@@ -247,3 +247,34 @@
 - [ ] Add screenshot/share functionality
 - [ ] Create onboarding tutorial
 
+
+
+
+## Phase 8 - Bug Fixes & Missing Features
+
+### Tune Stage Selector Issues
+- [x] Update TuneStageSelector to show different stages based on provider (IE vs DS1)
+- [x] DS1 has different stage descriptions than IE
+- [x] Make stage selector dynamic based on tuneProvider state
+
+### Apply Premium Animations
+- [x] Apply glass morphism to all cards
+- [x] Add smooth entrance animations to all sections
+- [x] Apply hover-lift effects to interactive elements
+- [ ] Add glow effects to performance gains
+- [x] Apply stagger delays to card entrances
+
+### Haptic Feedback
+- [x] Implement Vibration API for mobile devices
+- [x] Add haptic feedback on button clicks
+- [ ] Add haptic feedback on slider adjustments
+- [x] Add haptic feedback on preset selection
+- [ ] Add settings toggle for haptic feedback on/off
+
+### 3D Car Renderings
+- [ ] Research Three.js integration for React
+- [ ] Create 3D car model viewer component
+- [ ] Add rotating car showcase
+- [ ] Implement camera controls (rotate, zoom)
+- [ ] Add lighting and shadows to 3D models
+

@@ -14,6 +14,7 @@ export interface VehicleDatabase {
 }
 
 export type TuneStage = "stock" | "stage1" | "stage2" | "stage3";
+export type TuneProvider = "IE" | "DS1";
 
 export interface CalculatorState {
   tankSize: number;

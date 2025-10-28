@@ -16,6 +16,7 @@ import { CarShowcase } from "@/components/CarShowcase";
 import { calculatePerformance } from "@/lib/performance";
 import type { TuneStage } from "@/lib/types";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
+import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 import {
   calculateBlend,
   calculateEthanolOnlyBlend,
@@ -29,7 +30,8 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Calculator() {
   const { theme, toggleTheme } = useTheme();
-  const { playClick, playEngineStart } = useSoundEffects();
+  const { playClick, playEngineStart, playSuccess } = useSoundEffects();
+  const { vibrateClick, vibrateSuccess } = useHapticFeedback();
   const [state, setState] = useState<CalculatorState>(DEFAULT_CALCULATOR_STATE);
 
   // Load saved state on mount
@@ -48,6 +50,8 @@ export default function Calculator() {
   };
 
   const handleVehicleChange = (model: string, tankSize: number) => {
+    playEngineStart();
+    vibrateSuccess();
     if (tankSize > 0) {
       updateState({ selectedModel: model, tankSize });
     } else {
@@ -57,6 +61,7 @@ export default function Calculator() {
 
   const handlePresetSelect = (preset: PresetMode) => {
     playClick();
+    vibrateClick();
     updateState({ targetEthanol: preset.targetEthanol });
   };
 
@@ -132,7 +137,7 @@ export default function Calculator() {
       <main className="container py-8">
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Vehicle Selection */}
-          <Card className="p-6 bg-card border-border">
+          <Card className="p-6 glass hover-lift smooth-entrance stagger-1">
             <VehicleSelector
               selectedMake={state.selectedMake}
               selectedModel={state.selectedModel}
@@ -152,10 +157,12 @@ export default function Calculator() {
           )}
 
           {/* Tune Provider Selector */}
+          <div className="smooth-entrance stagger-2">
           <TuneProviderSelector
             selectedProvider={state.tuneProvider}
             onProviderChange={(provider) => updateState({ tuneProvider: provider })}
           />
+          </div>
 
           {/* Tune Stage Selector */}
           {state.selectedModel && (
@@ -165,6 +172,7 @@ export default function Calculator() {
                 updateState({ tuneStage: stage })
               }
               vehicleModel={state.selectedModel}
+              tuneProvider={state.tuneProvider}
             />
           )}
 
