@@ -11,8 +11,10 @@ import { OctaneGauge } from "@/components/OctaneGauge";
 import { VehicleSpecsCard } from "@/components/VehicleSpecsCard";
 import { PresetModes, PresetMode } from "@/components/PresetModes";
 import { TuneStageSelector } from "@/components/TuneStageSelector";
+import { CarShowcase } from "@/components/CarShowcase";
 import { calculatePerformance } from "@/lib/performance";
 import type { TuneStage } from "@/lib/types";
+import { useSoundEffects } from "@/hooks/useSoundEffects";
 import {
   calculateBlend,
   calculateEthanolOnlyBlend,
@@ -26,6 +28,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Calculator() {
   const { theme, toggleTheme } = useTheme();
+  const { playClick, playEngineStart } = useSoundEffects();
   const [state, setState] = useState<CalculatorState>(DEFAULT_CALCULATOR_STATE);
 
   // Load saved state on mount
@@ -52,6 +55,7 @@ export default function Calculator() {
   };
 
   const handlePresetSelect = (preset: PresetMode) => {
+    playClick();
     updateState({ targetEthanol: preset.targetEthanol });
   };
 
@@ -142,6 +146,11 @@ export default function Calculator() {
           </Card>
 
           {/* Vehicle Specs Card */}
+          {/* Car Showcase */}
+          {state.selectedModel && (
+            <CarShowcase vehicleModel={state.selectedModel} />
+          )}
+
           {state.selectedModel && (
             <VehicleSpecsCard vehicleModel={state.selectedModel} />
           )}
