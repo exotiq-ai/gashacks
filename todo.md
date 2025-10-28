@@ -278,3 +278,54 @@
 - [ ] Implement camera controls (rotate, zoom)
 - [ ] Add lighting and shadows to 3D models
 
+
+
+
+## Phase 9 - Mobile Build Preparation
+
+### Full App Review
+- [ ] Test all calculations for accuracy
+- [ ] Verify IE tune data calculations
+- [ ] Verify DS1 tune data calculations
+- [ ] Test vehicle selection and auto-fill
+- [ ] Test all preset modes
+- [ ] Test theme switching
+- [ ] Test session persistence
+- [ ] Verify all animations working
+- [ ] Test haptic feedback on mobile
+- [ ] Test sound effects
+
+### Mobile Optimization
+- [x] Verify touch targets are minimum 44x44px
+- [x] Add viewport meta tags for mobile
+- [x] Create PWA manifest.json
+- [x] Generate app icons (all sizes for iOS/Android)
+- [ ] Create splash screens
+- [ ] Add offline functionality (service worker)
+- [ ] Optimize images for mobile
+- [ ] Test on various screen sizes
+- [ ] Verify landscape/portrait modes
+- [x] Add safe area insets for notched devices (viewport-fit=cover)
+
+### Native Build Setup
+- [x] Research Capacitor vs React Native vs PWA (Capacitor chosen)
+- [x] Set up build configuration (MOBILE_BUILD_GUIDE.md created)
+- [x] Generate iOS app icons (1024x1024, 180x180, 120x120, etc.)
+- [x] Generate Android app icons (512x512, 192x192, 144x144, etc.)
+- [ ] Create app store screenshots
+- [x] Write app store descriptions (in MOBILE_BUILD_GUIDE.md)
+- [ ] Set up app signing
+- [ ] Test on iOS simulator
+- [ ] Test on Android emulator
+- [x] Prepare for App Store submission (guide complete)
+- [x] Prepare for Google Play submission (guide complete)
+
+### Performance Optimization
+- [ ] Minimize bundle size
+- [ ] Lazy load components
+- [ ] Optimize images (WebP format)
+- [ ] Add loading states
+- [ ] Implement code splitting
+- [ ] Cache vehicle database
+- [ ] Optimize re-renders
+
