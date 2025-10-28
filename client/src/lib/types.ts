@@ -13,6 +13,8 @@ export interface VehicleDatabase {
   vehicles: VehicleMake[];
 }
 
+export type TuneStage = "stock" | "stage1" | "stage2" | "stage3";
+
 export interface CalculatorState {
   tankSize: number;
   currentLevel: number;
@@ -26,6 +28,7 @@ export interface CalculatorState {
   selectedModel: string;
   fuelPriceEthanol: number;
   fuelPricePumpGas: number;
+  tuneStage: TuneStage;
 }
 
 export const DEFAULT_CALCULATOR_STATE: CalculatorState = {
@@ -41,5 +44,6 @@ export const DEFAULT_CALCULATOR_STATE: CalculatorState = {
   selectedModel: "",
   fuelPriceEthanol: 3.5,
   fuelPricePumpGas: 4.2,
+  tuneStage: "stock",
 };
 

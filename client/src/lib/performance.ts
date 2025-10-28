@@ -117,14 +117,42 @@ export const VEHICLE_PERFORMANCE_DB: Record<string, VehiclePerformanceData> = {
   },
 };
 
+import { getEstimatedPower } from "./tuneData";
+import type { TuneStage } from "./types";
+
 /**
  * Calculate estimated performance gains from ethanol content
+ * Uses real IE tune data when available, falls back to estimates
  */
 export function calculatePerformance(
   vehicleModel: string,
   ethanolPercent: number,
-  octaneRating: number
+  octaneRating: number,
+  tuneStage: TuneStage = "stock"
 ): PerformanceEstimate {
+  // Try to get real IE tune data first
+  const ieTuneData = getEstimatedPower(vehicleModel, tuneStage, ethanolPercent);
+  if (ieTuneData && tuneStage !== "stock") {
+    // Use real IE tune data
+    const baseHP = ieTuneData.hp - ieTuneData.hpGain;
+    const baseTorque = ieTuneData.torque - ieTuneData.torqueGain;
+    return {
+      baseHP,
+      estimatedHP: ieTuneData.hp,
+      hpGain: ieTuneData.hpGain,
+      hpGainPercent: (ieTuneData.hpGain / baseHP) * 100,
+      baseTorque,
+      estimatedTorque: ieTuneData.torque,
+      torqueGain: ieTuneData.torqueGain,
+      torqueGainPercent: (ieTuneData.torqueGain / baseTorque) * 100,
+      knockResistance: Math.min(100, 50 + ethanolPercent * 0.5),
+      safeToTune: true,
+      timingAdvancePotential: ethanolPercent >= 60 ? 1.5 : ethanolPercent >= 30 ? 1.0 : 0.5,
+      boostPotential: ethanolPercent >= 60 ? 5.5 : ethanolPercent >= 30 ? 3.0 : 1.5,
+    };
+  }
+
+  // Fallback to estimated performance
   const vehicleData =
     VEHICLE_PERFORMANCE_DB[vehicleModel] || getDefaultVehicleData();
 

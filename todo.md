@@ -90,3 +90,45 @@
 - [ ] Mileage tracking
 - [ ] Trend analysis charts
 
+
+
+
+## Phase 3 - IE Tune Integration & Missing Features
+
+### IE Tune Data Integration
+- [x] Integrate IE tune database (RS3, TTRS, S4, S5, SQ5, S3)
+- [x] Show real-world power gains for selected vehicle + tune stage
+- [x] Add tune stage selector (Stock, Stage 1, Stage 2, Stage 3)
+- [x] Display E85 vs 93 octane power comparison
+- [x] Show estimated power with current blend
+
+### Visual Enhancements (Still Missing)
+- [ ] 3D car visualization or high-quality car images
+- [ ] Animated fuel system visualization
+- [ ] Performance comparison charts
+- [ ] Add car image when vehicle is selected
+
+### Sound & Interaction (Still Missing)
+- [ ] Subtle sound effects (engine sounds, clicks, slider feedback)
+- [ ] Button click sounds
+- [ ] Fuel pump sound when calculating
+
+### Advanced Features (Still Missing)
+- [ ] Fill history tracking with timestamps
+- [ ] Cost analytics over time (savings calculator)
+- [ ] Comparison mode (side-by-side blend scenarios)
+- [ ] Weather integration for cold start warnings
+- [ ] Export fill history to CSV
+
+### Data & Analytics (Still Missing)
+- [ ] Fill-up history log with date/time
+- [ ] Savings calculator (vs premium pump gas over time)
+- [ ] Fuel economy tracking
+- [ ] Average cost per gallon over time
+- [ ] Total gallons of E85 vs pump gas used
+
+### Community Features (Future)
+- [ ] See popular blends for your vehicle
+- [ ] User reviews/comments on different mixes
+- [ ] Share your setup with other users
+

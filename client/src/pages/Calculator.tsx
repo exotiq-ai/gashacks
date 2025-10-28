@@ -10,7 +10,9 @@ import { PerformanceDashboard } from "@/components/PerformanceDashboard";
 import { OctaneGauge } from "@/components/OctaneGauge";
 import { VehicleSpecsCard } from "@/components/VehicleSpecsCard";
 import { PresetModes, PresetMode } from "@/components/PresetModes";
+import { TuneStageSelector } from "@/components/TuneStageSelector";
 import { calculatePerformance } from "@/lib/performance";
+import type { TuneStage } from "@/lib/types";
 import {
   calculateBlend,
   calculateEthanolOnlyBlend,
@@ -88,7 +90,8 @@ export default function Calculator() {
   const performance = calculatePerformance(
     state.selectedModel || "",
     blendResult.resultingMix,
-    blendResult.octaneRating
+    blendResult.octaneRating,
+    state.tuneStage
   );
 
   return (
@@ -141,6 +144,17 @@ export default function Calculator() {
           {/* Vehicle Specs Card */}
           {state.selectedModel && (
             <VehicleSpecsCard vehicleModel={state.selectedModel} />
+          )}
+
+          {/* Tune Stage Selector */}
+          {state.selectedModel && (
+            <TuneStageSelector
+              selectedStage={state.tuneStage}
+              onStageChange={(stage: TuneStage) =>
+                updateState({ tuneStage: stage })
+              }
+              vehicleModel={state.selectedModel}
+            />
           )}
 
           {/* Preset Modes */}
