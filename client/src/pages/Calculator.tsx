@@ -178,13 +178,14 @@ export default function Calculator() {
               <p className="text-xs text-muted-foreground">Performance fuel optimization</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {isAuthenticated && (
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setLocation("/settings")}
                 title="Settings"
+                className="min-h-[44px] min-w-[44px] touch-manipulation"
               >
                 <SettingsIcon className="h-5 w-5" />
               </Button>
@@ -193,26 +194,45 @@ export default function Calculator() {
               variant="outline"
               size="sm"
               onClick={() => setShowHistory(true)}
-              className="gap-2"
+              className="gap-1.5 min-h-[44px] touch-manipulation hidden sm:flex"
             >
               <History className="h-4 w-4" />
-              History
+              <span className="hidden md:inline">History</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => setShowHistory(true)}
+              title="History"
+              className="min-h-[44px] min-w-[44px] touch-manipulation sm:hidden"
+            >
+              <History className="h-5 w-5" />
             </Button>
             <Button
               variant="default"
               size="sm"
               onClick={handleSaveTank}
               disabled={saveTankMutation.isPending}
-              className="gap-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"
+              className="gap-1.5 min-h-[44px] touch-manipulation bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 hidden sm:flex"
             >
               <Save className="h-4 w-4" />
               {saveTankMutation.isPending ? "Saving..." : "Save Tank"}
             </Button>
             <Button
+              variant="default"
+              size="icon"
+              onClick={handleSaveTank}
+              disabled={saveTankMutation.isPending}
+              title="Save Tank"
+              className="min-h-[44px] min-w-[44px] touch-manipulation bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 sm:hidden"
+            >
+              <Save className="h-5 w-5" />
+            </Button>
+            <Button
               variant="outline"
               size="icon"
               onClick={toggleTheme}
-              className="rounded-full"
+              className="rounded-full min-h-[44px] min-w-[44px] touch-manipulation"
             >
               {theme === "dark" ? (
                 <Sun className="h-5 w-5" />

@@ -62,7 +62,7 @@ export function PresetModes({
               key={preset.name}
               onClick={() => onPresetSelect(preset)}
               className={`
-                relative p-4 rounded-lg border-2 transition-all duration-300
+                relative p-4 rounded-lg border-2 transition-all duration-300 min-h-[88px] touch-manipulation
                 ${
                   isActive
                     ? `bg-gradient-to-br ${preset.color} scale-105`

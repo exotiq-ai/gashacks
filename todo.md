@@ -440,3 +440,77 @@
 - [ ] Create feature graphics
 - [ ] Prepare build instructions
 
+
+
+
+## Phase 16 - Store Deployment Preparation (COMPLETED ✅)
+- [x] Create privacy policy for Exotiq Inc.
+- [x] Create terms of service for Exotiq Inc.
+- [x] Add in-app safety disclaimers
+- [x] Add account deletion feature (backend API)
+- [x] Add account deletion UI (Settings page)
+- [x] Generate store screenshots (via Management UI)
+- [x] Write store descriptions (in DEPLOYMENT_GUIDE.md)
+- [x] Create comprehensive deployment guide (DEPLOYMENT_GUIDE.md)
+- [x] Prepare Capacitor build instructions (iOS & Android)
+- [x] Create App Store submission checklist
+- [x] Create Google Play Store submission checklist
+
+## Phase 17 - Native App Store Deployment (TODO)
+- [ ] Install Capacitor dependencies (`pnpm add @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android`)
+- [ ] Initialize Capacitor project (`npx cap init`)
+- [ ] Add iOS platform (`npx cap add ios`)
+- [ ] Add Android platform (`npx cap add android`)
+- [ ] Build web assets (`cd client && pnpm build`)
+- [ ] Sync Capacitor (`npx cap sync`)
+- [ ] Configure iOS project in Xcode
+- [ ] Configure Android project in Android Studio
+- [ ] Test on iOS simulator
+- [ ] Test on Android emulator
+- [ ] Build iOS release for App Store
+- [ ] Build Android release APK
+- [ ] Sign Android APK
+- [ ] Submit to Apple App Store
+- [ ] Submit to Google Play Store
+
+## Phase 18 - Post-Launch (Future)
+- [ ] Monitor user feedback and reviews
+- [ ] Track analytics and usage patterns
+- [ ] Plan v1.1 features based on feedback
+- [ ] Create landing page at exotiq.ai
+- [ ] Social media marketing campaign
+- [ ] Automotive forum outreach (Reddit, etc.)
+- [ ] YouTube demo video
+- [ ] Consider re-enabling performance features with verified data
+
+
+
+
+## Phase 19 - Mobile UI/UX Bug Fixes (COMPLETED ✅)
+- [x] Fix vehicle dropdown menu not working on mobile browsers
+- [x] Verify all buttons work on mobile (iOS Safari, Chrome, Firefox)
+- [x] Check all menus are accessible on mobile
+- [x] Verify formatting and padding on small screens
+- [x] Test touch targets meet 44x44px minimum
+- [x] Verify all interactive elements respond to touch
+- [x] Test Settings page on mobile
+- [x] Test Tank History modal on mobile
+- [x] Check theme toggle on mobile
+- [x] Verify sliders work smoothly on touch devices
+- [x] Test all preset buttons on mobile
+- [x] Check cost calculator inputs on mobile
+- [x] Verify fuel gauge displays correctly on small screens
+
+**Mobile Improvements Made:**
+- Fixed Select component with proper height constraints (max-h-[min(400px)])
+- Added sideOffset to Select dropdown for better positioning
+- Increased all touch targets to minimum 44x44px
+- Added touch-manipulation CSS to prevent double-tap zoom
+- Responsive header buttons (icon-only on mobile, text on desktop)
+- Improved input field sizing (text-base, min-h-[44px])
+- Added mobile-specific CSS (16px font-size to prevent iOS zoom)
+- Fixed preset buttons with proper touch targets
+- Improved slider +/- buttons with 44x44px minimum
+- Enhanced Settings page with proper touch targets
+- Added safe-area-inset support for notched devices
+

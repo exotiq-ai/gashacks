@@ -58,7 +58,7 @@ export function PremiumSlider({
             min={min}
             max={max}
             step={step}
-            className="w-24 h-9 text-right font-mono text-base bg-card border-border"
+            className="w-24 min-h-[44px] text-right font-mono text-base bg-card border-border touch-manipulation"
           />
           {unit && (
             <span className="text-sm text-muted-foreground min-w-[2rem]">
@@ -73,7 +73,7 @@ export function PremiumSlider({
           size="icon"
           onClick={handleDecrement}
           disabled={value <= min}
-          className="h-10 w-10 rounded-full shrink-0 border-2 hover:border-accent hover:bg-accent/10 transition-all duration-200"
+          className="min-h-[44px] min-w-[44px] rounded-full shrink-0 border-2 hover:border-accent hover:bg-accent/10 transition-all duration-200 touch-manipulation"
         >
           <Minus className="h-4 w-4" />
         </Button>
@@ -90,7 +90,7 @@ export function PremiumSlider({
           size="icon"
           onClick={handleIncrement}
           disabled={value >= max}
-          className="h-10 w-10 rounded-full shrink-0 border-2 hover:border-accent hover:bg-accent/10 transition-all duration-200"
+          className="min-h-[44px] min-w-[44px] rounded-full shrink-0 border-2 hover:border-accent hover:bg-accent/10 transition-all duration-200 touch-manipulation"
         >
           <Plus className="h-4 w-4" />
         </Button>

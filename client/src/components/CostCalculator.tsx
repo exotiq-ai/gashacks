@@ -62,7 +62,7 @@ export function CostCalculator({
               onChange={handleEthanolPriceChange}
               min={0}
               step={0.1}
-              className="pl-7 bg-card border-border"
+              className="pl-7 min-h-[44px] bg-card border-border touch-manipulation text-base"
             />
           </div>
         </div>
@@ -81,7 +81,7 @@ export function CostCalculator({
               onChange={handlePumpGasPriceChange}
               min={0}
               step={0.1}
-              className="pl-7 bg-card border-border"
+              className="pl-7 min-h-[44px] bg-card border-border touch-manipulation text-base"
             />
           </div>
         </div>

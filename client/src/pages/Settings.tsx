@@ -37,6 +37,7 @@ export default function Settings() {
               variant="ghost"
               size="icon"
               onClick={() => setLocation("/")}
+              className="min-h-[44px] min-w-[44px] touch-manipulation"
             >
               <ArrowLeft className="h-5 w-5" />
             </Button>
@@ -79,6 +80,7 @@ export default function Settings() {
               <Button
                 variant="outline"
                 onClick={() => setLocation("/")}
+                className="min-h-[44px] touch-manipulation"
               >
                 View History
               </Button>
@@ -95,6 +97,7 @@ export default function Settings() {
                   <Button
                     variant="destructive"
                     onClick={() => setShowDeleteDialog(true)}
+                    className="min-h-[44px] touch-manipulation"
                   >
                     Delete My Account
                   </Button>
@@ -110,14 +113,14 @@ export default function Settings() {
           <div className="space-y-2">
             <Button
               variant="ghost"
-              className="w-full justify-start"
+              className="w-full justify-start min-h-[44px] touch-manipulation"
               onClick={() => window.open("/PRIVACY_POLICY.md", "_blank")}
             >
               Privacy Policy
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start"
+              className="w-full justify-start min-h-[44px] touch-manipulation"
               onClick={() => window.open("/TERMS_OF_SERVICE.md", "_blank")}
             >
               Terms of Service
