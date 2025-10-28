@@ -6,6 +6,11 @@ import { PremiumSlider } from "@/components/PremiumSlider";
 import { VehicleSelector } from "@/components/VehicleSelector";
 import { FuelGauge } from "@/components/FuelGauge";
 import { CostCalculator } from "@/components/CostCalculator";
+import { PerformanceDashboard } from "@/components/PerformanceDashboard";
+import { OctaneGauge } from "@/components/OctaneGauge";
+import { VehicleSpecsCard } from "@/components/VehicleSpecsCard";
+import { PresetModes, PresetMode } from "@/components/PresetModes";
+import { calculatePerformance } from "@/lib/performance";
 import {
   calculateBlend,
   calculateEthanolOnlyBlend,
@@ -44,6 +49,10 @@ export default function Calculator() {
     }
   };
 
+  const handlePresetSelect = (preset: PresetMode) => {
+    updateState({ targetEthanol: preset.targetEthanol });
+  };
+
   // Calculate blend results
   const blendResult = calculateBlend(
     {
@@ -73,6 +82,13 @@ export default function Calculator() {
       pumpGasOctane: state.pumpGasOctane,
       ethanolFuelOctane: state.ethanolFuelOctane,
     }
+  );
+
+  // Calculate performance estimates
+  const performance = calculatePerformance(
+    state.selectedModel || "",
+    blendResult.resultingMix,
+    blendResult.octaneRating
   );
 
   return (
@@ -121,6 +137,17 @@ export default function Calculator() {
               onModelChange={handleVehicleChange}
             />
           </Card>
+
+          {/* Vehicle Specs Card */}
+          {state.selectedModel && (
+            <VehicleSpecsCard vehicleModel={state.selectedModel} />
+          )}
+
+          {/* Preset Modes */}
+          <PresetModes
+            onPresetSelect={handlePresetSelect}
+            currentTarget={state.targetEthanol}
+          />
 
           {/* Tank Configuration */}
           <Card className="p-6 bg-card border-border space-y-6">
@@ -338,6 +365,17 @@ export default function Calculator() {
               </div>
             </div>
           </Card>
+
+          {/* Performance Dashboard */}
+          <PerformanceDashboard
+            performance={performance}
+            vehicleModel={state.selectedModel || ""}
+          />
+
+          {/* Octane Gauge */}
+          <div className="flex justify-center p-8 bg-card border border-border rounded-lg">
+            <OctaneGauge octane={blendResult.octaneRating} size={240} />
+          </div>
 
           {/* Cost Calculator */}
           <CostCalculator

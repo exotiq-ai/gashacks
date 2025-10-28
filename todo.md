@@ -49,3 +49,44 @@
 - [ ] Performance optimization
 - [ ] Create production checkpoint
 
+
+
+## Phase 2 - Premium Enhancements
+
+### Performance Dashboard
+- [x] Estimated HP/TQ gains calculator
+- [x] Knock resistance indicator
+- [x] "Safe to tune" status indicator
+- [x] Power potential meter
+
+### Visual Enhancements
+- [x] Animated gauge cluster for octane rating
+- [ ] 3D car visualization or high-quality car images
+- [x] Vehicle specs card (engine, HP, displacement)
+- [ ] Animated fuel system visualization
+- [ ] Performance comparison charts
+
+### Sound & Interaction
+- [ ] Subtle sound effects (clicks, engine sounds)
+- [x] Haptic feedback animations
+- [x] Smooth transitions between states
+
+### Advanced Features
+- [ ] Fill history tracking
+- [ ] Cost analytics over time
+- [x] Preset scenario modes (Track Day, Daily, Economy, Winter)
+- [ ] Comparison mode (side-by-side blends)
+- [ ] Weather integration for cold start warnings
+
+### Tuning Features
+- [x] AFR (Air-Fuel Ratio) recommendations
+- [x] Timing advance suggestions
+- [x] Boost pressure recommendations
+- [x] Spark plug heat range tips
+
+### Data & Analytics
+- [ ] Fill-up history log
+- [ ] Savings calculator (vs premium pump gas)
+- [ ] Mileage tracking
+- [ ] Trend analysis charts
+
