@@ -2,7 +2,7 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
-import { deleteTankHistory, getUserTankHistory, saveTankHistory } from "./db";
+import { deleteTankHistory, getUserTankHistory, saveTankHistory, deleteUserAccount } from "./db";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -16,6 +16,16 @@ export const appRouter = router({
       return {
         success: true,
       } as const;
+    }),
+    deleteAccount: protectedProcedure.mutation(async ({ ctx }) => {
+      // Delete user account and all associated data
+      await deleteUserAccount(ctx.user.id);
+      
+      // Clear session cookie
+      const cookieOptions = getSessionCookieOptions(ctx.req);
+      ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
+      
+      return { success: true };
     }),
   }),
 

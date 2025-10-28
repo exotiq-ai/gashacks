@@ -130,3 +130,25 @@ export async function deleteTankHistory(id: number, userId: number) {
     .delete(tankHistory)
     .where(eq(tankHistory.id, id));
 }
+
+
+
+export async function deleteUserAccount(userId: number): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot delete user: database not available");
+    return;
+  }
+
+  try {
+    // Delete all tank history for this user
+    await db.delete(tankHistory).where(eq(tankHistory.userId, userId));
+    
+    // Delete the user account
+    await db.delete(users).where(eq(users.id, userId));
+  } catch (error) {
+    console.error("[Database] Error deleting user account:", error);
+    throw error;
+  }
+}
+

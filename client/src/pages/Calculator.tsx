@@ -19,6 +19,7 @@ import { useSoundEffects } from "@/hooks/useSoundEffects";
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { TankHistoryModal } from "@/components/TankHistoryModal";
+import SafetyDisclaimer from "@/components/SafetyDisclaimer";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
@@ -458,6 +459,9 @@ export default function Calculator() {
         onOpenChange={setShowHistory}
         onLoadHistory={handleLoadHistory}
       />
+
+      {/* Safety Disclaimer */}
+      <SafetyDisclaimer />
 
       {/* Footer */}
       <footer className="border-t border-border bg-card/30 backdrop-blur-sm mt-12">

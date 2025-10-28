@@ -414,3 +414,29 @@
 - [x] Update manifest.json with new icons
 - [x] Update index.html with new favicon and apple-touch-icon
 
+
+
+
+## Phase 15 - App Store Submission Research
+- [x] Research Apple App Store requirements and guidelines
+- [x] Research Google Play Store requirements and guidelines
+- [x] Compile technical requirements for both platforms
+- [x] Document legal requirements (privacy policy, terms of service)
+- [x] Identify content policy compliance needs
+- [x] Create submission checklist for both stores
+- [x] Document required assets and metadata
+- [x] Research developer account requirements and costs
+
+
+
+
+## Phase 16 - Store Deployment Preparation
+- [ ] Create privacy policy for Exotiq Inc.
+- [ ] Create terms of service for Exotiq Inc.
+- [ ] Add in-app safety disclaimers
+- [ ] Add account deletion feature
+- [ ] Generate store screenshots
+- [ ] Write store descriptions (App Store & Play Store)
+- [ ] Create feature graphics
+- [ ] Prepare build instructions
+
