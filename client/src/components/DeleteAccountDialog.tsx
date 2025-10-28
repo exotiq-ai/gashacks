@@ -14,8 +14,15 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useAuth } from "@/_core/hooks/useAuth";
 
-export default function DeleteAccountDialog() {
-  const [open, setOpen] = useState(false);
+interface DeleteAccountDialogProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export default function DeleteAccountDialog({ open: controlledOpen, onOpenChange }: DeleteAccountDialogProps = {}) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
+  const setOpen = onOpenChange || setInternalOpen;
   const [confirmText, setConfirmText] = useState("");
   const { logout } = useAuth();
   

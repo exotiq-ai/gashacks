@@ -23,12 +23,13 @@ import SafetyDisclaimer from "@/components/SafetyDisclaimer";
 import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
-import { History, Save } from "lucide-react";
+import { History, Save, Settings as SettingsIcon } from "lucide-react";
 import {
   calculateBlend,
   calculateEthanolOnlyBlend,
 } from "@/lib/calculator";
 import { CalculatorState, DEFAULT_CALCULATOR_STATE } from "@/lib/types";
+import { useLocation } from "wouter";
 import {
   loadCalculatorState,
   saveCalculatorState,
@@ -40,6 +41,7 @@ export default function Calculator() {
   const { playClick, playEngineStart, playSuccess } = useSoundEffects();
   const { vibrateClick, vibrateSuccess } = useHapticFeedback();
   const { user, isAuthenticated } = useAuth();
+  const [, setLocation] = useLocation();
   const [state, setState] = useState<CalculatorState>(DEFAULT_CALCULATOR_STATE);
   const [showHistory, setShowHistory] = useState(false);
 
@@ -177,6 +179,16 @@ export default function Calculator() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {isAuthenticated && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setLocation("/settings")}
+                title="Settings"
+              >
+                <SettingsIcon className="h-5 w-5" />
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"
