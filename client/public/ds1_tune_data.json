@@ -377,6 +377,53 @@
           }
         }
       ]
+    },
+    {
+      "make": "Audi",
+      "model": "S8 D4",
+      "engine": "4.0T V8",
+      "stockPower": {
+        "hp": 520,
+        "tq": 481
+      },
+      "tunes": [
+        {
+          "stage": "Stage 1",
+          "description": "Tune only",
+          "fuel93": {
+            "hp": 620,
+            "tq": 610,
+            "hpGain": 100,
+            "tqGain": 129,
+            "percentGain": 19.2
+          },
+          "fuelE85": {
+            "hp": 690,
+            "tq": 690,
+            "hpGain": 170,
+            "tqGain": 209,
+            "percentGain": 32.7
+          }
+        },
+        {
+          "stage": "Stage 2",
+          "description": "Cool climate or intercooler upgrades, intakes optional",
+          "fuel93": {
+            "hp": 660,
+            "tq": 650,
+            "hpGain": 140,
+            "tqGain": 169,
+            "percentGain": 26.9
+          },
+          "fuelE85": {
+            "hp": 750,
+            "tq": 750,
+            "hpGain": 230,
+            "tqGain": 269,
+            "percentGain": 44.2
+          }
+        }
+      ]
     }
   ]
 }

@@ -192,3 +192,10 @@
 - [ ] Show pump gas octane rating in results
 - [ ] Display fuel type breakdown (E85 @ X%, Pump @ Y%)
 
+
+
+
+## Phase 6 - S8 DS1 Tune Data
+- [x] Add Audi S8 to DS1 tune database (same 4.0T V8 as RS6/RS7)
+- [x] Use RS6/RS7 performance specifications for S8
+
