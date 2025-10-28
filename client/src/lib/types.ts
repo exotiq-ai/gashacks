@@ -29,6 +29,7 @@ export interface CalculatorState {
   fuelPriceEthanol: number;
   fuelPricePumpGas: number;
   tuneStage: TuneStage;
+  tuneProvider: "IE" | "DS1";
 }
 
 export const DEFAULT_CALCULATOR_STATE: CalculatorState = {
@@ -45,5 +46,6 @@ export const DEFAULT_CALCULATOR_STATE: CalculatorState = {
   fuelPriceEthanol: 3.5,
   fuelPricePumpGas: 4.2,
   tuneStage: "stock",
+  tuneProvider: "IE",
 };
 

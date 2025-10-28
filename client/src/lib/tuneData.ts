@@ -1,5 +1,6 @@
 import type { TuneStage } from "@/lib/types";
-import ieTuneData from "../../public/ie_tune_data.json";
+import ieTuneDataRaw from "../../public/ie_tune_data.json";
+import ds1TuneDataRaw from "../../public/ds1_tune_data.json";
 
 export interface TuneSpec {
   stage: string;
@@ -22,15 +23,68 @@ export interface VehicleTuneData {
   tunes: TuneSpec[];
 }
 
+// Convert DS1 format to unified format
+function convertDS1ToUnified(ds1Data: any): { models: VehicleTuneData[] } {
+  const models: VehicleTuneData[] = ds1Data.vehicles.map((vehicle: any) => {
+    const tunes: TuneSpec[] = [];
+    
+    vehicle.tunes.forEach((tune: any) => {
+      // Add 93 octane tune
+      if (tune.fuel93) {
+        tunes.push({
+          stage: tune.stage,
+          fuel: "93 Octane",
+          hp: tune.fuel93.hp,
+          torque: tune.fuel93.tq,
+          hpGain: tune.fuel93.hpGain,
+          torqueGain: tune.fuel93.tqGain,
+          percentGain: tune.fuel93.percentGain,
+          notes: tune.description,
+        });
+      }
+      
+      // Add E85 tune
+      if (tune.fuelE85) {
+        tunes.push({
+          stage: tune.stage,
+          fuel: "E85",
+          hp: tune.fuelE85.hp,
+          torque: tune.fuelE85.tq,
+          hpGain: tune.fuelE85.hpGain,
+          torqueGain: tune.fuelE85.tqGain,
+          percentGain: tune.fuelE85.percentGain,
+          notes: tune.description,
+        });
+      }
+    });
+    
+    return {
+      make: vehicle.make,
+      model: vehicle.model,
+      engine: vehicle.engine,
+      years: "Various",
+      stockHP: vehicle.stockPower.hp,
+      stockTorque: vehicle.stockPower.tq,
+      tunes,
+    };
+  });
+  
+  return { models };
+}
+
+const ieTuneData = ieTuneDataRaw as { models: VehicleTuneData[] };
+const ds1TuneData = convertDS1ToUnified(ds1TuneDataRaw);
+
 /**
  * Get tune data for a specific vehicle model
  */
 export function getTuneDataForVehicle(
-  vehicleModel: string
+  vehicleModel: string,
+  provider: "IE" | "DS1" = "IE"
 ): VehicleTuneData | null {
   if (!vehicleModel) return null;
 
-  const data = ieTuneData as { models: VehicleTuneData[] };
+  const data = provider === "IE" ? ieTuneData : ds1TuneData;
   return (
     data.models.find((v) =>
       vehicleModel.toLowerCase().includes(v.model.toLowerCase())
@@ -44,9 +98,10 @@ export function getTuneDataForVehicle(
 export function getEstimatedPower(
   vehicleModel: string,
   tuneStage: TuneStage,
-  ethanolPercent: number
+  ethanolPercent: number,
+  provider: "IE" | "DS1" = "IE"
 ): { hp: number; torque: number; hpGain: number; torqueGain: number } | null {
-  const vehicleData = getTuneDataForVehicle(vehicleModel);
+  const vehicleData = getTuneDataForVehicle(vehicleModel, provider);
   if (!vehicleData) return null;
 
   // Map tune stage to stage name
@@ -121,8 +176,11 @@ export function getEstimatedPower(
 /**
  * Get all available tune stages for a vehicle
  */
-export function getAvailableTuneStages(vehicleModel: string): TuneStage[] {
-  const vehicleData = getTuneDataForVehicle(vehicleModel);
+export function getAvailableTuneStages(
+  vehicleModel: string,
+  provider: "IE" | "DS1" = "IE"
+): TuneStage[] {
+  const vehicleData = getTuneDataForVehicle(vehicleModel, provider);
   if (!vehicleData) return ["stock"];
 
   const stages: Set<string> = new Set(vehicleData.tunes.map((t) => t.stage));
@@ -140,13 +198,14 @@ export function getAvailableTuneStages(vehicleModel: string): TuneStage[] {
  */
 export function compareFuelTypes(
   vehicleModel: string,
-  tuneStage: TuneStage
+  tuneStage: TuneStage,
+  provider: "IE" | "DS1" = "IE"
 ): {
   octane93: TuneSpec | null;
   e85: TuneSpec | null;
   difference: { hp: number; torque: number; percent: number };
 } | null {
-  const vehicleData = getTuneDataForVehicle(vehicleModel);
+  const vehicleData = getTuneDataForVehicle(vehicleModel, provider);
   if (!vehicleData || tuneStage === "stock") return null;
 
   const stageMap: Record<TuneStage, string> = {

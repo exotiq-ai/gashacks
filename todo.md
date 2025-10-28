@@ -169,3 +169,26 @@
 - [ ] Progress bar animations
 - [x] Ripple effects on clicks
 
+
+
+
+## Phase 5 - Bug Fixes & Missing Features
+
+### Critical Bugs to Fix
+- [ ] Results section showing "Octane Total" but missing gas/ethanol breakdown
+- [ ] E30 Mixed Blend showing "Ethanol to Add: 4.24 gal" but not showing "Gas to Add"
+- [ ] E30 Ethanol Only showing "Ethanol to Add: 7.95 gal" but missing gas breakdown
+- [ ] Verify all calculation results are displaying correctly
+
+### DS1 Tune Integration
+- [x] Research DS1 (Dyno Spectrum) tune data for Audi models
+- [x] Add DS1 tune database alongside IE tunes
+- [x] Create tune provider selector (IE vs DS1)
+- [ ] Compare IE vs DS1 power numbers side-by-side
+- [ ] Add APR, Unitronic, and other popular tuners
+
+### Missing Display Elements
+- [ ] Restore "Gas (Gal)" column in results
+- [ ] Show pump gas octane rating in results
+- [ ] Display fuel type breakdown (E85 @ X%, Pump @ Y%)
+

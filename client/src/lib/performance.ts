@@ -128,10 +128,11 @@ export function calculatePerformance(
   vehicleModel: string,
   ethanolPercent: number,
   octaneRating: number,
-  tuneStage: TuneStage = "stock"
+  tuneStage: TuneStage = "stock",
+  tuneProvider: "IE" | "DS1" = "IE"
 ): PerformanceEstimate {
-  // Try to get real IE tune data first
-  const ieTuneData = getEstimatedPower(vehicleModel, tuneStage, ethanolPercent);
+  // Try to get real tune data first
+  const ieTuneData = getEstimatedPower(vehicleModel, tuneStage, ethanolPercent, tuneProvider);
   if (ieTuneData && tuneStage !== "stock") {
     // Use real IE tune data
     const baseHP = ieTuneData.hp - ieTuneData.hpGain;

@@ -11,6 +11,7 @@ import { OctaneGauge } from "@/components/OctaneGauge";
 import { VehicleSpecsCard } from "@/components/VehicleSpecsCard";
 import { PresetModes, PresetMode } from "@/components/PresetModes";
 import { TuneStageSelector } from "@/components/TuneStageSelector";
+import { TuneProviderSelector } from "@/components/TuneProviderSelector";
 import { CarShowcase } from "@/components/CarShowcase";
 import { calculatePerformance } from "@/lib/performance";
 import type { TuneStage } from "@/lib/types";
@@ -95,7 +96,8 @@ export default function Calculator() {
     state.selectedModel || "",
     blendResult.resultingMix,
     blendResult.octaneRating,
-    state.tuneStage
+    state.tuneStage,
+    state.tuneProvider
   );
 
   return (
@@ -154,6 +156,12 @@ export default function Calculator() {
           {state.selectedModel && (
             <VehicleSpecsCard vehicleModel={state.selectedModel} />
           )}
+
+          {/* Tune Provider Selector */}
+          <TuneProviderSelector
+            selectedProvider={state.tuneProvider}
+            onProviderChange={(provider) => updateState({ tuneProvider: provider })}
+          />
 
           {/* Tune Stage Selector */}
           {state.selectedModel && (
