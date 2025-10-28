@@ -103,23 +103,18 @@ export default function Calculator() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-accent/20 flex items-center justify-center">
-                <Droplet className="h-6 w-6 text-accent" />
-              </div>
-              <div>
-                <h1 className="text-xl font-semibold text-foreground">
-                  Ethanol Blend Calculator
-                </h1>
-                <p className="text-xs text-muted-foreground">
-                  Performance Fuel Mixing
-                </p>
-              </div>
+      <header className="border-b border-border/50 backdrop-blur-sm bg-background/80 sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img src="/gas-hacks-logo.png" alt="Gas Hacks" className="w-12 h-12" />
+            <div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 bg-clip-text text-transparent">
+                Gas Hacks
+              </h1>
+              <p className="text-xs text-muted-foreground">Performance fuel optimization</p>
             </div>
-            <Button
+          </div>
+          <Button
               variant="outline"
               size="icon"
               onClick={toggleTheme}
@@ -131,7 +126,6 @@ export default function Calculator() {
                 <Moon className="h-5 w-5" />
               )}
             </Button>
-          </div>
         </div>
       </header>
 
@@ -429,11 +423,11 @@ export default function Calculator() {
         <div className="container py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <Droplet className="h-4 w-4 text-accent" />
-              <span>Ethanol Blend Calculator v1.0</span>
+              <img src="/gas-hacks-logo.png" alt="Gas Hacks" className="w-5 h-5" />
+              <span className="font-semibold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">Gas Hacks v6.0</span>
             </div>
             <div className="text-center md:text-right">
-              <p>Designed for performance enthusiasts</p>
+              <span>Unlock your engine's potential</span>
             </div>
           </div>
         </div>
