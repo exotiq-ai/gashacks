@@ -23,8 +23,8 @@ export default function About() {
     },
     {
       title: 'Transparent Pricing',
-      description: '$30K flat fee, always',
-      detail: 'No hidden costs or surprises',
+      description: 'Tiered pricing: $35K-$150K',
+      detail: 'Matched to your property value',
     },
     {
       title: 'National Platform',

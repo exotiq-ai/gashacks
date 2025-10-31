@@ -15,6 +15,7 @@ export default function Contact() {
     phone: '',
     location: '',
     propertyValue: '',
+    pricingTier: '',
     transactionType: '',
     message: '',
   });
@@ -43,6 +44,7 @@ export default function Contact() {
         phone: '',
         location: '',
         propertyValue: '',
+        pricingTier: '',
         transactionType: '',
         message: '',
       });
@@ -213,6 +215,31 @@ export default function Contact() {
                       <option value="75-100m">$75M - $100M</option>
                       <option value="100m+">$100M+</option>
                     </select>
+                  </div>
+
+                  {/* Pricing Tier */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Interested Service Tier
+                    </label>
+                    <select
+                      name="pricingTier"
+                      value={formData.pricingTier}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-polaris-blue focus:border-transparent"
+                    >
+                      <option value="">Select tier (optional)</option>
+                      <option value="essential">Essential - $35K ($10M-$25M properties)</option>
+                      <option value="premier">Premier - $75K ($25M-$75M properties)</option>
+                      <option value="elite">Elite - $150K ($75M+ properties)</option>
+                      <option value="portfolio">Portfolio Management - Starting at $200K/year</option>
+                      <option value="not-sure">Not sure yet</option>
+                    </select>
+                    <p className="text-sm text-gray-500 mt-1">
+                      <a href="/pricing" className="text-polaris-blue hover:underline">
+                        View complete pricing details →
+                      </a>
+                    </p>
                   </div>
 
                   {/* Transaction Type */}

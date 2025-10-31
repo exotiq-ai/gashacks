@@ -40,7 +40,7 @@ export default function Terms() {
 
           <h2>4. Fees and Payment</h2>
           <p>
-            Polaris charges a flat fee of $30,000 per transaction, regardless of property value. This fee covers all services outlined in your service agreement. Payment terms will be specified in your individual contract.
+            Polaris uses a tiered pricing structure based on property value: Essential tier ($35,000 for properties $10M-$25M), Premier tier ($75,000 for properties $25M-$75M), and Elite tier ($150,000 for properties $75M+). Each tier includes specific services outlined in your service agreement. Portfolio Management services are priced separately based on portfolio size and complexity. Payment terms will be specified in your individual contract.
           </p>
 
           <h2>5. Professional Services</h2>

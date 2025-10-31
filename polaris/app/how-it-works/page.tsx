@@ -80,20 +80,20 @@ export default function HowItWorks() {
 
   const faqs = [
     {
-      question: 'How does Polaris handle properties over $50M?',
-      answer: 'Properties of any value are welcome at Polaris. Our $30K flat fee applies to all transactions, whether $10M or $100M. For ultra-high-value properties, we provide additional concierge services including enhanced privacy measures, international buyer coordination, and specialized legal structuring support.',
+      question: 'How does your pricing work?',
+      answer: 'We use a transparent tiered pricing model based on property value: Essential ($35K for $10M-$25M properties), Premier ($75K for $25M-$75M properties), and Elite ($150K for $75M+ properties). Each tier is designed to match the complexity and marketing requirements of properties in that range, while delivering 94-99% savings versus traditional 5-6% commissions.',
     },
     {
       question: 'What if I own multiple properties across markets?',
-      answer: 'Our Portfolio Management service is designed exactly for this. You\'ll have a single dedicated advisor managing all your properties, with a unified dashboard for tracking performance, market values, and opportunities across your entire portfolio.',
+      answer: 'Our Portfolio Management service is designed exactly for this. You\'ll have a single dedicated advisor managing all your properties, with a unified dashboard for tracking performance, market values, and opportunities across your entire portfolio. Portfolio Management starts at $200K annually for 4-6 properties.',
     },
     {
       question: 'How do you coordinate with my existing advisors?',
       answer: 'We work seamlessly with your attorney, CPA, wealth manager, and family office. Our platform facilitates secure document sharing and communication, and our advisors are experienced in complex transaction structures involving trusts, LLCs, and international entities.',
     },
     {
-      question: 'What\'s included in the $30K flat fee?',
-      answer: 'Everything. The flat fee covers your dedicated advisor, AI platform access, professional photography and staging coordination, MLS and syndication, all transaction coordination, legal document review, and post-close support. No hidden costs, no surprises.',
+      question: 'What\'s included in each pricing tier?',
+      answer: 'All tiers include a dedicated UHNW advisor, AI-powered valuation, MLS listing, buyer vetting, negotiation, and closing coordination. Premier adds premium photography, international marketing, and 24/7 support. Elite includes everything in Premier plus complete discretion protocols, dedicated transaction team, priority scheduling, and white-glove concierge services. View complete details at polaris.estate/pricing.',
     },
     {
       question: 'How quickly can we close?',

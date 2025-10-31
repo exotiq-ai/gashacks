@@ -3,12 +3,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "POLARIS | AI-Powered Luxury Real Estate for UHNW",
-  description: "Save an average of $1.8M per transaction with POLARIS. AI-powered platform for ultra-high-net-worth real estate transactions. Transparent $30K flat fee, white-glove service.",
+  description: "Save an average of $1.8M per transaction with POLARIS. AI-powered platform for ultra-high-net-worth real estate transactions. Transparent tiered pricing: $35K-$150K, white-glove service.",
   keywords: "UHNW real estate, luxury real estate AI, ultra high net worth properties, Miami luxury homes, Aspen real estate, save on real estate commissions, AI real estate platform",
   authors: [{ name: "Polaris" }],
   openGraph: {
     title: "POLARIS | AI-Powered Luxury Real Estate",
-    description: "Save an average of $1.8M per transaction. AI efficiency meets white-glove service for $10M-$100M properties.",
+    description: "Save an average of $1.8M per transaction. AI efficiency meets white-glove service for $10M-$100M properties. Tiered pricing: $35K-$150K.",
     url: "https://polaris.estate",
     siteName: "Polaris",
     images: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "POLARIS | AI-Powered Luxury Real Estate",
-    description: "Save an average of $1.8M per transaction with transparent pricing and AI-powered insights.",
+    description: "Save an average of $1.8M per transaction with transparent tiered pricing and AI-powered insights. $35K-$150K based on property value.",
     images: ["/twitter-image.jpg"],
   },
   icons: {

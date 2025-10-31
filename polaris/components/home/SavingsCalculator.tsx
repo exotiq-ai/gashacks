@@ -7,8 +7,38 @@ import Button from '../ui/Button';
 const SavingsCalculator: React.FC = () => {
   const [propertyValue, setPropertyValue] = useState(40000000); // $40M default
 
+  // Determine tier and fee based on property value
+  const getTierInfo = (value: number) => {
+    if (value >= 10000000 && value < 25000000) {
+      return {
+        name: 'Essential',
+        fee: 35000,
+        description: 'Core white-glove service',
+        color: 'bg-polaris-sky border-polaris-blue',
+        textColor: 'text-polaris-blue'
+      };
+    } else if (value >= 25000000 && value < 75000000) {
+      return {
+        name: 'Premier',
+        fee: 75000,
+        description: 'Enhanced international marketing',
+        color: 'bg-blue-50 border-blue-600',
+        textColor: 'text-blue-600'
+      };
+    } else {
+      return {
+        name: 'Elite',
+        fee: 150000,
+        description: 'Ultimate discretion & dedicated team',
+        color: 'bg-gray-900/5 border-gray-900',
+        textColor: 'text-gray-900'
+      };
+    }
+  };
+
+  const tierInfo = getTierInfo(propertyValue);
   const traditionalCommission = propertyValue * 0.055; // 5.5%
-  const polarisFee = 30000;
+  const polarisFee = tierInfo.fee;
   const savings = traditionalCommission - polarisFee;
   const savingsPercent = ((savings / traditionalCommission) * 100).toFixed(1);
 
@@ -88,12 +118,12 @@ const SavingsCalculator: React.FC = () => {
           </div>
 
           {/* Polaris */}
-          <div className="bg-polaris-sky border-2 border-polaris-blue rounded-xl p-6 text-center">
-            <p className="text-sm text-gray-600 mb-2">Polaris Flat Fee</p>
-            <p className="text-3xl md:text-4xl font-bold text-polaris-blue">
-              $30K
+          <div className={`${tierInfo.color} border-2 rounded-xl p-6 text-center`}>
+            <p className="text-sm text-gray-600 mb-2">Polaris {tierInfo.name} Tier</p>
+            <p className={`text-3xl md:text-4xl font-bold ${tierInfo.textColor}`}>
+              {formatShortCurrency(polarisFee)}
             </p>
-            <p className="text-xs text-gray-500 mt-2">Transparent. Always.</p>
+            <p className="text-xs text-gray-500 mt-2">{tierInfo.description}</p>
           </div>
         </div>
 
@@ -108,6 +138,28 @@ const SavingsCalculator: React.FC = () => {
           </p>
         </div>
 
+        {/* Tier Ranges */}
+        <div className="mt-8 p-6 bg-gray-50 rounded-xl">
+          <p className="text-sm font-semibold text-center text-gray-700 mb-4">Our Three Service Tiers:</p>
+          <div className="grid md:grid-cols-3 gap-4 text-center text-sm">
+            <div className={propertyValue < 25000000 ? 'font-bold text-polaris-blue' : 'text-gray-600'}>
+              <p className="font-semibold">Essential</p>
+              <p className="text-xs">$10M - $25M</p>
+              <p className="text-xs">$35K fee</p>
+            </div>
+            <div className={propertyValue >= 25000000 && propertyValue < 75000000 ? 'font-bold text-blue-600' : 'text-gray-600'}>
+              <p className="font-semibold">Premier</p>
+              <p className="text-xs">$25M - $75M</p>
+              <p className="text-xs">$75K fee</p>
+            </div>
+            <div className={propertyValue >= 75000000 ? 'font-bold text-gray-900' : 'text-gray-600'}>
+              <p className="font-semibold">Elite</p>
+              <p className="text-xs">$75M+</p>
+              <p className="text-xs">$150K fee</p>
+            </div>
+          </div>
+        </div>
+
         {/* CTA */}
         <div className="text-center mt-8">
           <Button
@@ -117,6 +169,11 @@ const SavingsCalculator: React.FC = () => {
           >
             Schedule Your Consultation
           </Button>
+          <p className="text-sm text-gray-500 mt-4">
+            <a href="/pricing" className="text-polaris-blue hover:underline">
+              View complete pricing details →
+            </a>
+          </p>
         </div>
       </div>
 

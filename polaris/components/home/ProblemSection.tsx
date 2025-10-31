@@ -83,9 +83,9 @@ const ProblemSection: React.FC = () => {
           <h3 className="text-2xl font-semibold text-polaris-blue mb-4">The Polaris Way</h3>
           <ul className="space-y-3 mb-6">
             {[
-              '$30K flat fee (transparent, always)',
-              '90%+ savings vs. traditional',
-              'AI-driven insights + white-glove service',
+              'Tiered pricing: $35K-$150K (matched to your property)',
+              '94-99% savings vs. traditional',
+              'AI-driven insights + progressive white-glove service',
               'Full transaction transparency',
               'Modern, streamlined experience',
             ].map((item, index) => (
@@ -98,10 +98,13 @@ const ProblemSection: React.FC = () => {
 
           {/* Stat Callout */}
           <div className="bg-polaris-sky border-l-4 border-polaris-blue p-4 rounded">
-            <p className="text-sm text-gray-600 mb-1">Flat Fee on a $40M Property</p>
-            <p className="text-3xl font-bold text-polaris-blue">$30K</p>
+            <p className="text-sm text-gray-600 mb-1">Premier Tier Fee on a $40M Property</p>
+            <p className="text-3xl font-bold text-polaris-blue">$75K</p>
             <p className="text-lg font-semibold text-green-600 mt-2">
-              SAVE $2.37M
+              SAVE $2.12M (97% savings)
+            </p>
+            <p className="text-xs text-gray-500 mt-2">
+              Includes: International marketing, 24/7 support, video tour, entity structuring
             </p>
           </div>
         </div>

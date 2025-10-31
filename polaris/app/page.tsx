@@ -5,6 +5,7 @@ import Hero from '@/components/home/Hero';
 import ProblemSection from '@/components/home/ProblemSection';
 import HowItWorksSection from '@/components/home/HowItWorksSection';
 import SavingsCalculator from '@/components/home/SavingsCalculator';
+import PortfolioManagement from '@/components/home/PortfolioManagement';
 import Testimonials from '@/components/home/Testimonials';
 import TrustSignals from '@/components/home/TrustSignals';
 import FinalCTA from '@/components/home/FinalCTA';
@@ -17,6 +18,7 @@ export default function Home() {
       <ProblemSection />
       <HowItWorksSection />
       <SavingsCalculator />
+      <PortfolioManagement />
       <Testimonials />
       <TrustSignals />
       <FinalCTA />
