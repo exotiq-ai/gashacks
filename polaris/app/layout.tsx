@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import CookieConsent from "@/components/CookieConsent";
+import StructuredData from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "POLARIS | AI-Powered Luxury Real Estate for UHNW",
@@ -41,6 +42,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <StructuredData type="organization" />
+      </head>
       <body className="antialiased">
         {children}
         <CookieConsent />
